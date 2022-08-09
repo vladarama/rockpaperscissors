@@ -43,9 +43,6 @@ let roundResult = ""
 
 function playRound(playerSelection, computerSelection) {
 
-    console.log(playerSelection)
-    console.log(computerSelection)
-
     if (playerSelection.toLowerCase() === computerSelection) {
         roundResult = "Tie ! Nobody Wins"
     }
@@ -104,40 +101,149 @@ function playRound(playerSelection, computerSelection) {
 // it returns a string saying if the user won or lost and displays the scoreboard
 
 
+// we create 3 event listener that connect to each of the weapons (buttons)
+// we modified the game function to manipulate the dom tree
+// the game function is called in each of the event listeners with the only change being the player selection
+
+
+
+// get the buttons
+const rock = document.querySelector('#rock')
+
+const paper = document.querySelector('#paper')
+
+const scissors = document.querySelector('#scissors')
+
+// get the results div for the score and the final results
+const div = document.querySelector(".results")
+
+
+// create a div for the round result
+const round = document.createElement('div')
+
+// create a div for the final result
+const final = document.createElement('div')
+
+
+// create another div for the score
+const score = document.createElement('div')
+
+
+
+// initialize the count of the user and computer
+let countUser = 0
+let countComputer = 0
+
+
+
+
+
+
+// create 'click' event listeners for each of the buttons 
+
+rock.addEventListener('click', () => {
+
+    playerSelection = "rock"
+
+    game()
+
+})
+
+
+
+paper.addEventListener('click', () => {
+
+    playerSelection = "paper"
+
+    game()
+
+
+
+})
+
+
+
+
+scissors.addEventListener('click', () => {
+
+    playerSelection = "scissors"
+
+    game()
+
+})
+
+
+
+
+
+
+
+
 function game() {
-    let countUser = 0
-    let countComputer = 0
 
-    for (let i = 0; i < 5; i++) {
 
-        console.log(playRound(prompt("Please choose your tool !!(rock / paper/ scissors)"), getComputerChoice()))
+    // play round and log it to the console
+    console.log(playRound(playerSelection, getComputerChoice()))
 
-        if (roundResult.slice(0, 7) === "You Win") {
-            countUser = countUser + 1
-        }
+    // incrementing the counters
+    if (roundResult.slice(0, 7) === "You Win") {
+        countUser = countUser + 1
+    }
 
-        else if (roundResult.slice(0, 3) === "Tie") {
-            countUser = countUser
-        }
+    else if (roundResult.slice(0, 3) === "Tie") {
+        countUser = countUser
+    }
 
-        else if (roundResult.slice(0, 8) === "You Lose") {
-            countComputer = countComputer + 1
-        }
+    else if (roundResult.slice(0, 8) === "You Lose") {
+        countComputer = countComputer + 1
+    }
 
+
+
+    // print the score on the screen
+    score.textContent = `USER SCORE (${countUser}) - COMPUTER SCORE (${countComputer})`
+
+    div.appendChild(score)
+
+
+    // print the round results on the screen
+    round.textContent = roundResult
+
+    div.appendChild(round)
+
+
+    // print the winner of the game
+    if (countUser === 5) {
+
+        final.textContent = `Congrats, You won the game !!! The score is ${countUser} - ${countComputer}`
+
+        div.appendChild(final)
 
     }
 
 
-    if (countUser > countComputer) {
-        return `You won the game !!! The score is ${countUser} - ${countComputer}`
+    else if (countComputer === 5) {
+
+        final.textContent = `You will get them next time ! The score is ${countUser} - ${countComputer}`
+
+        div.appendChild(final)
+
     }
 
-    else if (countUser === countComputer) {
-        return `It is a tie !!! The score is ${countUser} - ${countComputer}`
+
+    if (countComputer >= 6 || countUser >= 6) {
+
+        // reset the counter (game is finished)
+        countComputer = 0
+        countUser = 0
+
+        location.reload()
+
     }
 
-    else {
-        return `You lost the game. The score is ${countUser} - ${countComputer}`
-    }
+
+
 
 }
+
+
