@@ -1,3 +1,7 @@
 # rockpaperscissors
 
-This is a an introductory project in javascript to learn the syntax and how the language works. This game is played in the console on a web page, but the project will be revisited to include buttons and a functional design.
+live: https://vladarama.github.io/rockpaperscissors/
+
+This is an introductory project in HTML/CSS/JS that is a part of The Odin Project curriculum. 
+
+It is a simple rock/ paper/ scissors game where the user plays against the computer. In the first part of the project the game was designed to be only played in the console, but the project has been revisited to include a simple and minimal user interface. It was a fun little project and I learned a lot about Javascript, DOM manipulation and how to create a functional design.
